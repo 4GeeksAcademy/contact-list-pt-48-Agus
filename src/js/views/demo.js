@@ -7,37 +7,50 @@ import "../../styles/demo.css";
 
 export const Demo = () => {
 	const { store, actions } = useContext(Context);
+	const [loadingState, setLoadingState] = useState(true)
 
+	useEffect(() => {
+		const loadData = async () => {
+			const contact_list = await actions.getContactsFromAgenda();
+			actions.setContactlist(contact_list);
+		}
+		loadData();
+		setLoadingState(false);
+	}, []);
 	return (
-		<div className="container">
-			<ul className="list-group">
-				{store.demo.map((item, index) => {
-					return (
-						<li
-							key={index}
-							className="list-group-item d-flex justify-content-between"
-							style={{ background: item.background }}>
-							<Link to={"/single/" + index}>
-								<span>Link to: {item.title}</span>
-							</Link>
-							{// Conditional render example
-							// Check to see if the background is orange, if so, display the message
-							item.background === "orange" ? (
-								<p style={{ color: item.initial }}>
-									Check store/flux.js scroll to the actions to see the code
-								</p>
-							) : null}
-							<button className="btn btn-success" onClick={() => actions.changeColor(index, "orange")}>
-								Change Color
-							</button>
-						</li>
-					);
-				})}
-			</ul>
-			<br />
-			<Link to="/">
-				<button className="btn btn-primary">Back home</button>
-			</Link>
-		</div>
+		<body className="body__home">
+			<div className="container w-100 v-100 d-flex flex-column justify-content-center align-items-center mt-5">
+				<div className="col-10 d-flex flex-row flex-wrap justify-content-start align-items-center  gap-5">
+					{!loadingState && store.contact_list.map((contact) => {
+						return (
+							<div className="card mb-3 bg-secondary text-light border" style={{ 'maxWidth': '540px', 'minWidth': '400px' }} key={contact.id}>
+								<div className="row g-0">
+									<div className="col-md-4">
+										<img src={`https://picsum.photos/200/300?random=${contact.id}`} className="img-fluid rounded-start" alt="contact_image" />
+									</div>
+									<div className="col-md-8">
+										<div className="card-body">
+											<h5 className="card-title">{contact.full_name}</h5>
+											<Link to={`/single/${contact.id}`} className=" text-end">
+												<button className="btn btn-light text-end">Details</button>
+											</Link>
+										</div>
+									</div>
+								</div>
+							</div>
+						)
+					})}
+				</div>
+				<br />
+				<div className="col-10 d-flex flex-row justify-content-around">
+					<Link to="/">
+						<button className="btn btn-primary">Back home</button>
+					</Link>
+					<Link to="/new">
+						<button className="btn btn-primary fw-bold">Add Contact</button>
+					</Link>
+				</div>
+			</div>
+		</body>
 	);
 };

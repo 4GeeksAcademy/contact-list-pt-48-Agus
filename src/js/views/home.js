@@ -33,8 +33,8 @@ export const Home = () => {
 				<h1 className='text-light'>Welcome to your contact app</h1>
 				<div className="d-flex flex-column justify-content-between align-items-center">
 					<form className="d-flex flex-column justify-content-between align-items-center" onSubmit={goToAgendaList}>
-						<label className='text-light m-3' htmlFor='agenda'>Enter agenda Name: <input type='text' id='agenda' required minLength='1' onChange={(event) => { setAgendaName(event.target.value) }}></input></label>
-						<button type="submit" className="btn btn-success fw-bold">
+						<label className='text-light m-3' htmlFor='agenda'>Enter agenda Name: <input type='text' id='agenda' required minLength='1' onChange={(event) => { setAgendaName(event.target.value) }} placeholder="Enter name here"></input></label>
+						<button type="submit" className="btn btn-success fw-bold mb-1">
 							Go to the list
 						</button>
 					</form>

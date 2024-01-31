@@ -5,6 +5,8 @@
     background: rgb(0,0,0);
     background: linear-gradient(0deg, rgba(0,0,0,1) 1%, rgba(89,89,89,1) 31%, rgba(255,255,255,1) 85%);
     height: 93vh;
+    padding: 0%;
+    margin: 0%;
 }
 
 .main__container_home {

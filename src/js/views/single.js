@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Single = props => {
@@ -21,7 +21,6 @@ export const Single = props => {
 	}
 
 	useEffect(() => {
-		// console.log(Number(params.contactid))
 		const [contactFiltered] = store.contact_list.filter(contact => contact.id == Number(params.contactid))
 		setContact(contactFiltered);
 	}, []);
